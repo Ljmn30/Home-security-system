@@ -13,7 +13,7 @@ SoftwareSerial SIM800L(23, 22); //Tx , Rx
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };                                                     //mac para modulo wifi
 WiFiClient client;
 WiFiClientSecure secured;
-UniversalTelegramBot bot(BOTtoken, client);
+UniversalTelegramBot bot(BOTtoken, secured);
 
 IPAddress serverip(162,243,87,153);                                                   // numeric IP for emoncms.org (no DNS) WAN                 
 String apikey = "44710febd8162d15d04f55a5c4a64240";
@@ -43,7 +43,7 @@ void setup()
   Serial.begin(Baudserial); //Configura velocidad del puerto serie del Arduino
   Serial.begin(BaudWifi);
   SIM800L.begin(BaudSIM800L);
-  Activatesensor ();
+  //Activatesensor ();
 }
 
 void loop ()
@@ -58,24 +58,12 @@ void loop ()
       //envio_sms();
       //delay(5000);
       Connect();
-      //ConnectWifi();
       delay(5000);
-      //bot.sendMessage(CHAT_ID, "Alerta. Intrusión detectada!!", "");
+      
     }
     Serial.println("\nSin Evento ");
     delay(1000);
 }
-/*
-void BotStar(){
-  delay(3000);
-  Serial.println("\nBoot iniciado");
-  bot.sendMessage(CHAT_ID, "Bot started", "");
-  
-}
-
-void BotSenMessage(){
-  bot.sendMessage(CHAT_ID, "Motion detected!!", "");
-}*/
 
 void Connect () 
 {
@@ -111,9 +99,6 @@ int ConnectWifi()
   long rssi;
   long aux;
   int N = 5, intento = 0;
-  if(rssi == 0 && intento == 0){
-    
-  }
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   secured.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org
@@ -122,7 +107,6 @@ int ConnectWifi()
     delay(500);
   }
   Serial.println(WiFi.localIP());
-  bot.sendMessage(CHAT_ID, "Bot iniciado", "");
   rssi= WiFi.RSSI();
   Serial.println("Potencia de señal WIFI:");
   Serial.println(rssi);
@@ -140,7 +124,7 @@ int ConnectWifi()
       intento++;
       Serial.print("Intento # : ");
       Serial.println(intento);
-    }while (aux == 0 and intento < N);*/
+    }while (aux == 0 and intento < N); */
    
     if (not (rssi == 0))
     {
@@ -149,6 +133,7 @@ int ConnectWifi()
         Serial.print("Conectado a Wifi\n");
         Serial.print("IP: ");
         Serial.println((WiFi.localIP()));
+        bot.sendMessage(CHAT_ID, "Alerta, Intrusión detectada", "");
         if (not (WiFi.RSSI() == 0))
         {
           if(client.connect(serverip, 80))
