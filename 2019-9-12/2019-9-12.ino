@@ -6,8 +6,8 @@
 #define Baudserial 9600
 #define BaudSIM800L 19200
 #define BaudWifi 115200
-#define BOTtoken "5356568417:AAELkVZvlkk1SSEn1oe6Te_Sszk4yfpSMso"  // your Bot Token (Get from Botfather)
-#define CHAT_ID "1991461800"
+#define BOTtoken "OURTOKEN"  // your Bot Token (Get from Botfather)
+#define CHAT_ID "OURCHAT_ID"
 
 SoftwareSerial SIM800L(23, 22); //Tx , Rx
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };                                                     //mac para modulo wifi
@@ -15,8 +15,8 @@ WiFiClient client;
 WiFiClientSecure secured;
 UniversalTelegramBot bot(BOTtoken, secured);
 
-IPAddress serverip(162,243,87,153);                                                   // numeric IP for emoncms.org (no DNS) WAN                 
-String apikey = "44710febd8162d15d04f55a5c4a64240";
+IPAddress serverip(IP SERVER);                                                   // numeric IP for emoncms.org (no DNS) WAN                 
+String apikey = "YOURAPIKEY";
 //String message = "Alerta, movimiento detectado";
 int respuesta; 
 char alert5[] = "GET http://162.243.87.153/input/post.json?node=1&json={Alerta:5}&apikey=44710febd8162d15d04f55a5c4a64240\r\nHTTP/1.1\r\nHost:emoncms.org\r\nConnection: close\r\n\r\n";              
@@ -30,8 +30,8 @@ boolean lastConnected = false;                 // ciclo principal del estado de 
 //const char* ssid     = "IoT";
 //const char* password = "joselu30";
 
-const char* ssid     = "DIGIFIBRA-C17F";
-const char* password = "HCPDJQCD73";
+const char* ssid     = "SSID-WIFI";
+const char* password = "PASSWORD-WIFI";
 int Conexion = false;
 
 void setup()
@@ -281,7 +281,7 @@ void envio_sms()                                //Funcion para el envio de mensa
   }
   SIM800L.println("AT+CMGF=1"); // Se configura el modo de texto
   updateSerial();
-  SIM800L.println("AT+CMGS=\"+50765907961\"");//Se agrega el numero al que se desea enviar el SMS
+  SIM800L.println("AT+CMGS=\"+ NUMBER MOVIL\"");//Se agrega el numero al que se desea enviar el SMS
   updateSerial();
   Serial.println("Enviando SMS..");
   delay(5000);
@@ -312,7 +312,7 @@ int Senddirec()
   int dev = 0;
   char aux_str[25];
   Serial.println("Intento de conexion al Servidor .... \n"); 
-  if (enviarAT("AT+CIPSTART=\"TCP\",\"162.243.87.153\",\"80\"", "CONNECT OK", 10000))   //Inicia una conexión TCP 
+  if (enviarAT("AT+CIPSTART=\"TCP\",\"IPSERVER\",\"80\"", "CONNECT OK", 10000))   //Inicia una conexión TCP 
   {
     sprintf(aux_str, "AT+CIPSEND=%d", strlen(alert5));
     if (enviarAT(aux_str, ">", 5000) == 1)  //5000
