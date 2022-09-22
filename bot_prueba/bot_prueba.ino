@@ -3,15 +3,15 @@
 #include <UniversalTelegramBot.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "DIGIFIBRA-C17F";
-const char* password = "HCPDJQCD73";
+const char* ssid = "SSID-WIFI";
+const char* password = "PASSWORD-WIFI";
 
 // Initialize Telegram BOT
-#define BOTtoken "5356568417:AAELkVZvlkk1SSEn1oe6Te_Sszk4yfpSMso"  // your Bot Token (Get from Botfather)
+#define BOTtoken "OURBOTOKEN"  // your Bot Token (Get from Botfather)
 
 
 // message you
-#define CHAT_ID "1991461800"
+#define CHAT_ID "--------"
 
 WiFiClientSecure secured;
 UniversalTelegramBot bot(BOTtoken, secured);
