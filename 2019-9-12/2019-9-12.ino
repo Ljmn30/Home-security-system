@@ -19,8 +19,8 @@ IPAddress serverip(IP SERVER);                                                  
 String apikey = "YOURAPIKEY";
 //String message = "Alerta, movimiento detectado";
 int respuesta; 
-char alert5[] = "GET http://162.243.87.153/input/post.json?node=1&json={Alerta:5}&apikey=44710febd8162d15d04f55a5c4a64240\r\nHTTP/1.1\r\nHost:emoncms.org\r\nConnection: close\r\n\r\n";              
-char alert0[] = "GET http://162.243.87.153/input/post.json?node=1&json={Alerta:0}&apikey=44710febd8162d15d04f55a5c4a64240\r\nHTTP/1.1\r\nHost:emoncms.org\r\nConnection: close\r\n\r\n";
+char alert5[] = "GET http://162.243.87.153/input/post.json?node=1&json={Alerta:5}&apikey=------r\nHTTP/1.1\r\nHost:emoncms.org\r\nConnection: close\r\n\r\n";              
+char alert0[] = "GET http://162.243.87.153/input/post.json?node=1&json={Alerta:0}&apikey=------\r\nHTTP/1.1\r\nHost:emoncms.org\r\nConnection: close\r\n\r\n";
 int node = 1; //if 0, not used
 const int pir=27;     
 int pir_lectura;
