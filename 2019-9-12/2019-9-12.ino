@@ -27,8 +27,8 @@ int pir_lectura;
 boolean pir_estado = LOW;
 unsigned long lastConnectionTime = 0;          // ultima conexion al servidor al servidor en milisegundos
 boolean lastConnected = false;                 // ciclo principal del estado de la conexion la ultima vez
-//const char* ssid     = "IoT";
-//const char* password = "joselu30";
+//const char* ssid     = "YourSSID";
+//const char* password = "YourPassword";
 
 const char* ssid     = "SSID-WIFI";
 const char* password = "PASSWORD-WIFI";
